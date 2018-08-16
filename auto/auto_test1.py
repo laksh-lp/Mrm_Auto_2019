@@ -88,21 +88,6 @@ def slow_down():
 	stm_send='m0x4999y0000'
 	ser.write(stm_send.encode())
 
-def obstacle_avoid(obstacle_right,obstacle_left):#TAKING DISTANCE IN CENTIMETERS
-	if(obstacle_left<0):
-		print("Waiting for Values")
-	if (obstacle_right>50 and obstacle_left>50):
-		straight()	
-	if (obstacle_right>50 and obstacle_left<50):
-		clockwise()	
-	if (obstacle_left>50 and obstacle_right<50):
-		anticlockwise()	
-	if(obstacle_right<50 and obstacle_left<50):
-		if(obstacle_right<25 and obstacle_left<25):
-		  brute_stop()
-		else:  	
-			backward()
-	get_ult(obs)		
 
 			
 
