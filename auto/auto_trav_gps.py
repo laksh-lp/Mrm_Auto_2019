@@ -33,7 +33,7 @@ def get_waypoint_distance(lat1,lon1,lat2,lon2):
 	lat2=math.radians(lat2)  
 	lon_diff=math.radians((lon2)-(lon1))   
 	waypoint_dist = (math.sin(lat_diff/2.0)*math.sin(lat_diff/2.0))
-	waypoint_dist2= math.cos(lat1)
+	waypoint_dist2= math.cos(lat1)	
 	waypoint_dist2*=math.cos(lat2)
 	waypoint_dist2*=math.sin(lon_diff/2.0)*math.sin(lon_diff/2.0)                                      	
 	waypoint_dist +=waypoint_dist2

@@ -1,7 +1,7 @@
 import math,time,serial
 from gps3 import gps3
 ###########################Global Variables#####################################################
-global stm_send,current_lat,current_long,end_lat,end_long, obstacle_distance_left,obstacle_distance_right
+global stm_send,current_lat,current_long,end_lat,end_long, obstacle_distance_left,obstacle_distance_right,current_heading
 ################################################################################################
 ###########################GPS and Serial Initialization########################################
 gps_socket = gps3.GPSDSocket()
@@ -49,16 +49,35 @@ def get_waypoint_distance(lat1,lon1,lat2,lon2):
 #		waypoint_heading+=360
 	#print(waypoint_heading)	
 #	return waypoint_heading;
-		
+
+def angle_waypoint(lat1,lon1,lat2,lon2):
+	try:
+    	slope=(lat1-lat2)/(lon1-lon2)
+        theta=math.atan(slope)
+        degree2=math.fabs(math.degrees(theta))
+        return degree2
+    except ZeroDivisionError:
+        print("ZeroDivisionError Same Longitudes Given")
+#        enter()
+
 ################################################################################################
 angle_buffer=10
 def straight():
 	stm_send='m4x4999y0000'
+	print ('Going straight')
+	ser.write(stm_send)
 def anticlockwise():
 	stm_send='m4x0000y4999'
+	print('Rotating anticlockwise')
+	ser.write(stm_send)
 def clockwise():
 	stm_send='m4x9999y4999'
+	print('Rotating clockwise')
+	ser.write(stm_send)
 def backward():
 	stm_send='m4x4999y9999'	
+	print('Going backward')
+	ser.write(stm_send)
+
 def decide_move():
 	if (math.fabs(current_heading-)
