@@ -103,28 +103,28 @@ def get_ult(obstacle_right,obstacle_left):
                 #time.sleep(0.7589)
 ####################################################################################################
 def straight():
-	stm_send='m4x4999y0000'
+	stm_send='m3x4999y0000'
 	print ('Going straight')
 	ser.write(stm_send.encode())
 def anticlockwise():
-	stm_send='m4x0000y4999'
+	stm_send='m3x0000y4999'
 	print('Rotating anticlockwise')
 	ser.write(stm_send.encode())
 def clockwise():
-	stm_send='m4x9999y4999'
+	stm_send='m3x9999y4999'
 	print('Rotating clockwise')
 	ser.write(stm_send.encode())
 def backward():
-	stm_send='m4x4999y9999'	
+	stm_send='m3x4999y9999'	
 	print('Going backward')
 	ser.write(stm_send.encode())
 def brute_stop():
-	stm_send='m4x4999y4999'
+	stm_send='m3x4999y4999'
 	print('Brute Stop')
 	ser.write(stm_send.encode())
 <<<<<<< HEAD
 def slow_down():
-	stm_send='m4x4999y0000'	
+	stm_send='m3x4999y0000'	
 	ser.write(stm_send.encode())
 	stm_send='m2x4999y0000'
 	ser.write(stm_send.encode())
