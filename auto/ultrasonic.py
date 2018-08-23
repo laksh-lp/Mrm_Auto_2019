@@ -18,7 +18,7 @@ pulse_end1 = 0
 pulse_end2 = 0
 print ("Waiting For Sensor To Settle")
 
-time.sleep(2)
+
 while True:
 	GPIO.output(TRIG1, True)
 	GPIO.output(TRIG2, True)
@@ -37,11 +37,12 @@ while True:
 			pulse_end2 = time.time()
 	pulse_duration1 = pulse_end1 - pulse_start1
 	pulse_duration2 = pulse_end2 - pulse_start2
+	time.sleep(0.5)
+	print(pulse_start1, pulse_start2)
 	distance1 = pulse_duration1 * 17150
 	distance2 = pulse_duration2 * 17150
 	distance1 = round(distance1, 2)
 	distance2 = round(distance2, 2)
 	print ("Distance Left: ",distance2," cm ","Distance Right: ",distance1," cm")
-	time.sleep(0.7589)
 GPIO.cleanup()
 

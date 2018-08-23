@@ -8,22 +8,56 @@ gps_socket = gps3.GPSDSocket()
 data_stream = gps3.DataStream()
 gps_socket.connect()
 gps_socket.watch()
-ser = serial.Serial(port='/dev/ttyUSB1',baudrate = 57600)
-################################################################################################ 
-##################################Main Function#################################################		
-if __name__ == "__main__":
-    def update():
+ser = serial.Serial(port='/dev/ttyUSB0',baudrate = 57600)
+################################################################################################
+#################################Updating GPS Location of the Rover#############################
+def update():
         while True:
             
             for new_data in gps_socket:
-                if new_data:
+                if (type(new_data)==type(56.8)):
                     data_stream.unpack(new_data)
                     #ADD HEADING 
-                    latitude =data_stream.TPV['lat']
-                    longitude = data_stream.TPV['lon']
-                    return longitude,latitude
-            break		
+                    current_lat =data_stream.TPV['lat']
+                    current_long = data_stream.TPV['lon']
+                    return current_lat,current_long
+                else:
+                	print('Waiting for GPS Values')
+                	continue                    
+            break	 
 ################################################################################################
+##################################Main Traversal Functions######################################
+def straight():
+	stm_send='m3x4999y0000'
+	print ('Going straight')
+	ser.write(stm_send.encode())
+def anticlockwise():
+	stm_send='m3x0000y4999'
+	print('Rotating anticlockwise')
+	ser.write(stm_send.encode())
+def clockwise():
+	stm_send='m3x9999y4999'
+	print('Rotating clockwise')
+	ser.write(stm_send.encode())
+def backward():
+	stm_send='m3x4999y9999'	
+	print('Going backward')
+	ser.write(stm_send.encode())
+def brute_stop():
+	stm_send='m3x4999y4999'
+	print('Brute Stop')
+	ser.write(stm_send.encode())
+def slow_down():
+	stm_send='m3x4999y0000'	
+	ser.write(stm_send.encode())
+	stm_send='m2x4999y0000'
+	ser.write(stm_send.encode())
+	stm_send='m0x4999y0000'
+	ser.write(stm_send.encode())
+
+
+################################################################################################
+
 #########################GPS Distance and Heading Calculations##################################
 
 def get_waypoint_distance(lat1,lon1,lat2,lon2):
@@ -50,34 +84,34 @@ def get_waypoint_distance(lat1,lon1,lat2,lon2):
 	#print(waypoint_heading)	
 #	return waypoint_heading;
 
-def angle_waypoint(lat1,lon1,lat2,lon2):
-	try:
-    	slope=(lat1-lat2)/(lon1-lon2)
-        theta=math.atan(slope)
-        degree2=math.fabs(math.degrees(theta))
-        return degree2
-    except ZeroDivisionError:
-        print("ZeroDivisionError Same Longitudes Given")
+#def angle_waypoint(lat1,lon1,lat2,lon2):
+#	try:
+#    	slope=(lat1-lat2)/(lon1-lon2)
+#        theta=math.atan(slope)
+#        degree2=math.fabs(math.degrees(theta))
+#        return degree2
+#    except ZeroDivisionError:
+#        print("ZeroDivisionError Same Longitudes Given")
 #        enter()
 
 ################################################################################################
-angle_buffer=10
-def straight():
-	stm_send='m4x4999y0000'
-	print ('Going straight')
-	ser.write(stm_send)
-def anticlockwise():
-	stm_send='m4x0000y4999'
-	print('Rotating anticlockwise')
-	ser.write(stm_send)
-def clockwise():
-	stm_send='m4x9999y4999'
-	print('Rotating clockwise')
-	ser.write(stm_send)
-def backward():
-	stm_send='m4x4999y9999'	
-	print('Going backward')
-	ser.write(stm_send)
+def gps_traversal(waypoint_dist):
+	if(waypoint_dist<5):
+		print('Stop')
+		brute_stop()
+	else:
+		print('Distance remaining',waypoint_dist)
+		straight()	
 
-def decide_move():
-	if (math.fabs(current_heading-)
+##################################Main Function#################################################		
+if __name__ == "__main__":
+    end_lat=13.347934
+    end_long=74.72134
+    update()
+    waypoint_dist=get_waypoint_distance(current_lat,current_long,end_lat,end_long)
+    if(waypoint_dist<5):
+    	print('Stop')
+    else:
+    	print('Distance remaining',waypoint_dist)	
+
+################################################################################################

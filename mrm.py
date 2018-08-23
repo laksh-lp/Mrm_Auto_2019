@@ -16,50 +16,50 @@ def arm():
 	up=j.get_button(4)
 	down=j.get_button(2)
 	c=0
-	ser.write('n'.encode())
+	
 	if m1:
 			c=1
 			if up:
 				print('1up')
-				ser.write('A'.encode())
+				ser.write('aA'.encode())
 			if down:
 				print('1down')
-				ser.write('B'.encode())
+				ser.write('aB'.encode())
 	if m2:
 			if up:
 				print('2up')
-				ser.write('C'.encode())
+				ser.write('aC'.encode())
 			if down:
 				print('2down')
-				ser.write('D'.encode())
+				ser.write('aD'.encode())
 	if m3:
 			if up:
 				print('3up')
-				ser.write('E'.encode())
+				ser.write('aE'.encode())
 			if down:
 				print('3down')
-				ser.write('F'.encode())
+				ser.write('aF'.encode())
 	if m4:
 			if up:
 				print('4up')
-				ser.write('G'.encode())
+				ser.write('aG'.encode())
 			if down:
 				print('4down')
-				ser.write('H'.encode())
+				ser.write('aH'.encode())
 	if m5:
 			if up:
 				print('5up')
-				ser.write('I'.encode())
+				ser.write('aI'.encode())
 			if down:
 				print('5down')
-				ser.write('J'.encode())
+				ser.write('aJ'.encode())
 	if m6:
 			if up:
 				print('6up')
-				ser.write('K'.encode())
+				ser.write('aK'.encode())
 			if down:
 				print('6down')
-				ser.write('L'.encode())
+				ser.write('aL'.encode())
 def motorcode():
 	x1=j.get_axis(0)
 	y1=j.get_axis(1)

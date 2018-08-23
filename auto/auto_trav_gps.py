@@ -20,9 +20,9 @@ if __name__ == "__main__":
                 if new_data:
                     data_stream.unpack(new_data)
                     #ADD HEADING 
-                    latitude =data_stream.TPV['lat']
-                    longitude = data_stream.TPV['lon']
-                    return longitude,latitude
+                    current_lat =data_stream.TPV['lat']
+                    current_long = data_stream.TPV['lon']
+                    return current_lat,current_long
             break		
 ################################################################################################
 #########################GPS Distance and Heading Calculations##################################

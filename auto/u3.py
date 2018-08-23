@@ -27,59 +27,72 @@ def get_ult(obstacle_right,obstacle_left):
 		time.sleep(0.00001)
 		GPIO.output(TRIG1, False)
 		GPIO.output(TRIG2, False)
-		pulse_end1, pulse_end2 = 0
 		while GPIO.input(ECHO1)==0 and GPIO.input(ECHO2)==0:
-		
-		while (GPIO.input(ECHO1)==1 or GPIO.input(ECHO2)==1) and (pulse_end1/1200000000)<(32300/200):
+			pulse_start1 = time.time()
+			pulse_start2 = time.time()
+		while GPIO.input(ECHO1)==1 or GPIO.input(ECHO2)==1:
 			if GPIO.input(ECHO1)==1:
 				pulse_end1 = time.time() 
 			if GPIO.input(ECHO2)==1:
 				pulse_end2 = time.time()
-		pulse_duration1 = pulse_end1  
-		pulse_duration2 = pulse_end2 
+		pulse_duration1 = pulse_end1 - pulse_start1
+		pulse_duration2 = pulse_end2 - pulse_start2
 		obstacle_right = pulse_duration1 * 17150
 		obstacle_left = pulse_duration2 * 17150
 		obstacle_left = round(obstacle_left, 2)
 		obstacle_right = round(obstacle_right, 2)
 		print(obstacle_right,obstacle_left)
-		if(obstacle_left<0 ):
+		if(obstacle_left<0):
 			print("Waiting for Values")
-		elif (obstacle_right>50 and obstacle_left>50):
+		if (obstacle_right>50 and obstacle_left>50):
 			straight()	
-		elif (obstacle_right>50 and obstacle_left<50):
+		if (obstacle_right>50 and obstacle_left<50):
 			clockwise()	
-		elif (obstacle_left>50 and obstacle_right<50):
-			anticlockwise()			
-		elif (obstacle_right<50 and obstacle_left<50):
-			backward()
-		else :
-                        brute_stop()
-                        
-	print('out of loop')		
-                        
+		if (obstacle_left>50 and obstacle_right<50):
+			anticlockwise()	
+		if(obstacle_right<50 and obstacle_left<50):
+			if(obstacle_right<25 and obstacle_left<25):
+				brute_stop()
+			else:  	
+				backward()
+
                 #time.sleep(0.7589)
 ####################################################################################################
 def straight():
-	stm_send='m3x4999y0000'
+	stm_send='m4x4999y0000'
 	print ('Going straight')
 	ser.write(stm_send.encode())
 def anticlockwise():
-	stm_send='m3x0000y4999'
+	stm_send='m4x0000y4999'
 	print('Rotating anticlockwise')
 	ser.write(stm_send.encode())
 def clockwise():
-	stm_send='m3x9999y4999'
+	stm_send='m4x9999y4999'
 	print('Rotating clockwise')
 	ser.write(stm_send.encode())
 def backward():
-	stm_send='m3x4999y9999'	
+	stm_send='m4x4999y9999'	
 	print('Going backward')
 	ser.write(stm_send.encode())
 def brute_stop():
-	stm_send='m3x4999y4999'
+	stm_send='m4x4999y4999'
 	print('Brute Stop')
 	ser.write(stm_send.encode())
-
+def obstacle_avoid(obstacle_right,obstacle_left):#TAKING DISTANCE IN CENTIMETERS
+	if(obstacle_left<0):
+		print("Waiting for Values")
+	if (obstacle_right>50 and obstacle_left>50):
+		straight()	
+	if (obstacle_right>50 and obstacle_left<50):
+		clockwise()	
+	if (obstacle_left>50 and obstacle_right<50):
+		anticlockwise()	
+	if(obstacle_right<50 and obstacle_left<50):
+		if(obstacle_right<25 and obstacle_left<25):
+		  brute_stop()
+		else:  	
+			backward()
+	get_ult(obs)		
 
 			
 
@@ -93,5 +106,9 @@ if __name__=='__main__':
 
 
 GPIO.cleanup()
+
+
+
+
 
 
