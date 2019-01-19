@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<title>Net Surveilance</title>
+<body>
+<embed type="application/x-vlc-plugin" pluginspage="http://www.videolan.org"
+       width="550"
+       height="400"
+       id="vlc" />
+
+<script type="text/javascript">
+<!--
+var vlc = document.getElementById("vlc");
+var options = new Array(":aspect-ratio=4:3", ":rtsp-tcp");
+var id = vlc.playlist.add("rtsp://192.168.1.10/user=admin&password=&channel=1&stream=0.sdp?real_stream--rtp-caching=100", "fancy name", options);
+vlc.playlist.play();
+//-->
+</script>
+
+<embed type="application/x-vlc-plugin" pluginspage="http://www.videolan.org"
+       width="550"
+       height="400"
+       id="vlc2" />
+
+<script type="text/javascript">
+<!--
+var vlc2 = document.getElementById("vlc2");
+var options = new Array(":aspect-ratio=4:3", ":rtsp-tcp");
+var id = vlc2.playlist.add("rtsp://192.168.1.10/user=admin&password=&channel=1&stream=0.sdp?real_stream--rtp-caching=100", "fancy name", options);
+vlc2.playlist.play();
+//-->
+</script>
+
+<embed type="application/x-vlc-plugin" pluginspage="http://www.videolan.org"
+       width="550"
+       height="400"
+       id="vlc3" />
+
+<script type="text/javascript">
+<!--
+var vlc3 = document.getElementById("vlc3");
+var options = new Array(":aspect-ratio=4:3", ":rtsp-tcp");
+var id = vlc3.playlist.add("rtsp://192.168.1.10/user=admin&password=&channel=1&stream=0.sdp?real_stream--rtp-caching=100", "fancy name", options);
+vlc3.playlist.play();
+//-->
+</script>
+
+<embed type="application/x-vlc-plugin" pluginspage="http://www.videolan.org"
+       width="550"
+       height="400"
+       id="vlc4" />
+
+<script type="text/javascript">
+<!--
+var vlc4 = document.getElementById("vlc4");
+var options = new Array(":aspect-ratio=4:3", ":rtsp-tcp");
+var id = vlc4.playlist.add("rtsp://192.168.1.10/user=admin&password=&channel=1&stream=0.sdp?real_stream--rtp-caching=100", "fancy name", options);
+vlc4.playlist.play();
+//-->
+</script>
+
+</body>
+</html>

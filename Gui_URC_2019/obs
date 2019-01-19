@@ -1,0 +1,8 @@
+import lidar
+import ultrasonic1
+import ultrasonic2
+
+ld=lidar.get_distnce()
+u1=ultrasonic1.get_distance()
+u2=ultrasonic2.get_distance()
+if
