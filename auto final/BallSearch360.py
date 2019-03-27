@@ -16,13 +16,32 @@ global val
 val = "NOTFOUND" 
 def detect():
         val = getball()
-        if(val=="FOUND"):
+        if(val=="Found"):
+                print("FOUND bveurgv uergcergcnrnergqgfcoegognncrgcrxg" )
                 brute_stop()
+                val = getball()
+                print("ball found 1 stage")
+                if(val=="Found"):
+                        for i in range (150):
+                                print("moving straight ball found")
+                                straight()
+                        ser.write('f')
+                        quit()
+                else:
+                        while(val!="Found"):
+                                val=getball()
+                                print("moving clockwise ball found once checking")
+                                clockwise()
+                        for i in range (150):
+                                print("moving straight ball found")
+                                straight()
+                        ser.write('f')
+                        quit()                
                 print(val)
-                quit()
+                #quit()
 
 def straight():
-	stm_send='m5x4999y0000z'
+	stm_send='m8x4999y0000z'
 	print ('Going straight')
 	ser.write(stm_send.encode())
 	ser.write(stm_send.encode())
@@ -42,12 +61,12 @@ def clockwise1():
 	ser.write(stm_send.encode())
 	ser.write(stm_send.encode())
 def backward():
-	stm_send='m1x4999y9999z'	
+	stm_send='m8x4999y9999z'	
 	print('Going backward')
 	ser.write(stm_send.encode())
 	ser.write(stm_send.encode())
 def brute_stop():
-	stm_send='m2x4999y4999z'
+	stm_send='m5x4999y4999z'
 	print('Brute Stop')
 	ser.write(stm_send.encode())
 	ser.write(stm_send.encode())
@@ -158,10 +177,11 @@ def clock_turn():
                         z=n
                 clockwise1()
                 val=getball()
-                if(val == "Found"):
-                        brute_stop()
-                        print(val,"Ball detected")
-                        quit()
+                #if(val == "Found"):
+                 #       brute_stop()
+                  #      print(val,"Ball detected")
+                   #     quit()
+                detect()
 
                       
 
@@ -185,8 +205,8 @@ def anti_turn():
 global startlat,startlong
 startlat,startlong=pos_update()
 global endlat,endlong
-endlat=13.349749
-endlong=74.791256
+endlat=13.3477315
+endlong=74.7922708
 matchdist()
 print("Ball search starting")
 startlat,startlong=pos_update()
