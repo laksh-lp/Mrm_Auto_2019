@@ -57,7 +57,7 @@ def irc():
 	if ab in a:
 		a.remove(ab)
 	if len(a)>=5:
-		if a[len(a)-4]=="N" and a[len(a)-3]=="E" and a[len(a)-2]=="S" and a[len(a)-1]=="W":
+		if a[len(a)-4]=="N" and a[len(a)-3]=="S" and a[len(a)-2]=="W" and a[len(a)-1]=="E":
 			print("You win")
 			quit()
 
